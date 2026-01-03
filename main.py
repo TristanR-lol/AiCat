@@ -41,7 +41,7 @@ def Available():
     pyautogui.press("Enter")
 
 def Busy():
-    pyautogui.moveTo(1000, 960)
+    pyautogui.moveTo(MessageBarX, MessageBarY)
     pyautogui.click()
     pyautogui.typewrite("/busy")
     pyautogui.press("Enter")
@@ -50,7 +50,7 @@ def Busy():
     pyautogui.press("Enter")
 
 def FloodChatLines():
-    pyautogui.moveTo(1000, 960)
+    pyautogui.moveTo(MessageBarX, MessageBarY)
     pyautogui.click()
     pyautogui.typewrite("/AiCat FloodChatLines")
     pyautogui.press("Enter")
