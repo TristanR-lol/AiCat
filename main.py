@@ -1,12 +1,10 @@
 # Disclaimer: I do not take any responsibility for usage of this script. Use at your own risk.
 
-YourName = "Jhon Smith"
+YourName = "John Smith"
 FloodChatLineMessage = "AI Cat"
 
-MessageBarX = 1000
-MessageBarY = 960
-
-ConfigDirectory = "C:\Program Files\AiCat"
+MessageBarX = 0
+MessageBarY = 0
 
 import tkinter as tk
 from pystray import Icon, Menu, MenuItem
@@ -14,26 +12,21 @@ from PIL import Image
 import threading
 import pyautogui
 import time
-import ctypes
-import os
-
-ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(
-    "aicat.tristan.desktop"
-)
 
 root = tk.Tk()
 
 root.title("AI Cat")
-root.geometry("500x300")
+root.geometry("550x200")
 
 root.protocol("WM_DELETE_WINDOW", root.withdraw)
 
 def Type(text):
     pyautogui.moveTo(MessageBarX, MessageBarY)
     pyautogui.click()
-    pyautogui.typewrite(text)
+    pyautogui.typewrite(text, 0.01)
     time.sleep(0.01)
     pyautogui.press("Enter")
+    time.sleep(0.1)
 
 # Commands
 
@@ -70,17 +63,28 @@ def HappyFace():
 
 # Buttons
 
-AvailableButton = tk.Button(root, text="Available", command=Available)
-BusyButton = tk.Button(root, text="Busy", command=Busy)
-FloodButton = tk.Button(root, text="Flood Chat Lines", command=FloodChatLines)
-SetPointButton = tk.Button(root, text="Set Message Box Point (Saves 5 seconds after)", command=SetPoint)
-HappyFaceButton = tk.Button(root, text=":)", command=HappyFace)
+ConfigFrame = tk.LabelFrame(root, text="Configuration", padx=10, pady=10)
+CommandsFrame = tk.LabelFrame(root, text="Commands", padx=10, pady=10)
+AvailableButton = tk.Button(CommandsFrame, text="Available", command=Available)
+BusyButton = tk.Button(CommandsFrame, text="Busy", command=Busy)
+FloodButton = tk.Button(CommandsFrame, text="Flood Chat Lines", command=FloodChatLines)
+SetPointButton = tk.Button(ConfigFrame, text="Set Message Box Point (Saves 5 seconds after)", command=SetPoint)
+NameLabel = tk.Label(ConfigFrame, text="Enter Your Name")
+NameInputBox = tk.Entry(ConfigFrame)
+NameInputButton = tk.Button(ConfigFrame, text="Set Name", command=lambda: setattr(__import__('__main__'), 'YourName', NameInputBox.get()))
+#HappyFaceButton = tk.Button(root, text=":)", command=HappyFace)
 
 SetPointButton.pack()
+NameLabel.pack()
+NameInputBox.pack()
+NameInputButton.pack()
 AvailableButton.pack()
 BusyButton.pack()
 FloodButton.pack()
-HappyFaceButton.pack()
+ConfigFrame.grid(padx=10, column=1, row=1)
+CommandsFrame.grid(padx=10, column=0, row=1)
+
+#HappyFaceButton.pack()
 
 def create_icon():
     image = Image.open("icon.png")
