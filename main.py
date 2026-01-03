@@ -1,15 +1,13 @@
 # Disclaimer: I do not take any responsibility for usage of this script. Use at your own risk.
 
-# Config
-# Only A - Z and a - z and certain special characters for punctuation are available.
-YourName = "Tristan Ranero"
+YourName = "Jhon Smith"
 FloodChatLineMessage = "AI Cat"
 
-# Make sure to set theese coordinates based on your screen
 MessageBarX = 1000
 MessageBarY = 960
 
-# Code
+ConfigDirectory = "C:\Program Files\AiCat"
+
 import tkinter as tk
 from pystray import Icon, Menu, MenuItem
 from PIL import Image
@@ -17,6 +15,7 @@ import threading
 import pyautogui
 import time
 import ctypes
+import os
 
 ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(
     "aicat.tristan.desktop"
@@ -25,7 +24,7 @@ ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(
 root = tk.Tk()
 
 root.title("AI Cat")
-root.geometry("300x200")
+root.geometry("500x300")
 
 root.protocol("WM_DELETE_WINDOW", root.withdraw)
 
@@ -77,7 +76,7 @@ FloodButton = tk.Button(root, text="Flood Chat Lines", command=FloodChatLines)
 SetPointButton = tk.Button(root, text="Set Message Box Point (Saves 5 seconds after)", command=SetPoint)
 HappyFaceButton = tk.Button(root, text=":)", command=HappyFace)
 
-#SetPointButton.pack()
+SetPointButton.pack()
 AvailableButton.pack()
 BusyButton.pack()
 FloodButton.pack()
