@@ -29,54 +29,59 @@ root.geometry("300x200")
 
 root.protocol("WM_DELETE_WINDOW", root.withdraw)
 
+def Type(text):
+    pyautogui.moveTo(MessageBarX, MessageBarY)
+    pyautogui.click()
+    pyautogui.typewrite(text)
+    time.sleep(0.01)
+    pyautogui.press("Enter")
+
 # Commands
 
 def Available():
-    pyautogui.moveTo(MessageBarX, MessageBarY)
-    pyautogui.click()
-    pyautogui.typewrite("/available")
-    pyautogui.press("Enter")
-    pyautogui.click()
-    pyautogui.typewrite("[ " + YourName + " set their status to *Available* ]")
-    pyautogui.press("Enter")
+    Type("/available")
+    Type("[ " + YourName + " set their status to *Available* ]")
 
 def Busy():
-    pyautogui.moveTo(MessageBarX, MessageBarY)
-    pyautogui.click()
-    pyautogui.typewrite("/busy")
-    pyautogui.press("Enter")
-    pyautogui.click()
-    pyautogui.typewrite("[ " + YourName + " set their status to *Busy* ]")
-    pyautogui.press("Enter")
+    Type("/busy")
+    Type("[ " + YourName + " set their status to *Busy* ]")
 
 def FloodChatLines():
-    pyautogui.moveTo(MessageBarX, MessageBarY)
-    pyautogui.click()
-    pyautogui.typewrite("/AiCat FloodChatLines")
-    pyautogui.press("Enter")
+    Type("/AICat FloodChatLines")
 
     for i in range(50):
-        pyautogui.click()
-        pyautogui.typewrite(FloodChatLineMessage)
-        time.sleep(0.01)
-        pyautogui.press("Enter")
-    
+        Type(FloodChatLineMessage)
+
+    Type("Flooding Complete")
+
+def SetPoint():
+    time.sleep(5)
+    global MessageBarX, MessageBarY
+    MessageBarX, MessageBarY = pyautogui.position()
+    print("Set Message Box Point to: " + str(MessageBarX) + ", " + str(MessageBarY))
     pyautogui.click()
-    pyautogui.typewrite("Flooding Complete")
-    pyautogui.press("Enter")
+    pyautogui.click()
+    pyautogui.typewrite("Messages will now send from this position :)", 0.05)
 
-    
-
+def HappyFace():
+    pyautogui.moveTo(MessageBarX, MessageBarY)
+    pyautogui.click()
+    pyautogui.typewrite(": )")
+    pyautogui.press(["left", "backspace"], interval=0)
 
 # Buttons
 
 AvailableButton = tk.Button(root, text="Available", command=Available)
 BusyButton = tk.Button(root, text="Busy", command=Busy)
 FloodButton = tk.Button(root, text="Flood Chat Lines", command=FloodChatLines)
+SetPointButton = tk.Button(root, text="Set Message Box Point (Saves 5 seconds after)", command=SetPoint)
+HappyFaceButton = tk.Button(root, text=":)", command=HappyFace)
 
+SetPointButton.pack()
 AvailableButton.pack()
 BusyButton.pack()
 FloodButton.pack()
+HappyFaceButton.pack()
 
 def create_icon():
     image = Image.open("icon.png")

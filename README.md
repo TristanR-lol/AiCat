@@ -1,2 +1,2 @@
 # AiCat
-Chat Commands for MS Teams
+Funny Chat Commands for MS Teams
