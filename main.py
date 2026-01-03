@@ -16,7 +16,8 @@ import time
 root = tk.Tk()
 
 root.title("AI Cat")
-root.geometry("550x200")
+root.geometry("550x300")
+root.configure(bg="#ccf2cd")
 
 root.protocol("WM_DELETE_WINDOW", root.withdraw)
 
@@ -37,6 +38,10 @@ def Available():
 def Busy():
     Type("/busy")
     Type("[ " + YourName + " set their status to *Busy* ]")
+
+def Reset():
+    Type("/reset")
+    Type("[ " + YourName + " *Reset* their status ]")
 
 def FloodChatLines():
     Type("/AICat FloodChatLines")
@@ -67,6 +72,7 @@ ConfigFrame = tk.LabelFrame(root, text="Configuration", padx=10, pady=10)
 CommandsFrame = tk.LabelFrame(root, text="Commands", padx=10, pady=10)
 AvailableButton = tk.Button(CommandsFrame, text="Available", command=Available)
 BusyButton = tk.Button(CommandsFrame, text="Busy", command=Busy)
+ResetButton = tk.Button(CommandsFrame, text="Reset Status", command=Reset)
 FloodButton = tk.Button(CommandsFrame, text="Flood Chat Lines", command=FloodChatLines)
 SetPointButton = tk.Button(ConfigFrame, text="Set Message Box Point (Saves 5 seconds after)", command=SetPoint)
 NameLabel = tk.Label(ConfigFrame, text="Enter Your Name")
@@ -74,12 +80,23 @@ NameInputBox = tk.Entry(ConfigFrame)
 NameInputButton = tk.Button(ConfigFrame, text="Set Name", command=lambda: setattr(__import__('__main__'), 'YourName', NameInputBox.get()))
 #HappyFaceButton = tk.Button(root, text=":)", command=HappyFace)
 
+ConfigFrame.configure(bg="#ccf2cd")
+CommandsFrame.configure(bg="#ccf2cd")
+NameLabel.configure(bg="#ccf2cd")
+#AvailableButton.configure(relief="flat")
+#BusyButton.configure(relief="flat")
+#ResetButton.configure(relief="flat")
+#FloodButton.configure(relief="flat")
+#SetPointButton.configure(relief="flat")
+#NameInputButton.configure(relief="flat")
+
 SetPointButton.pack()
 NameLabel.pack()
 NameInputBox.pack()
 NameInputButton.pack()
 AvailableButton.pack()
 BusyButton.pack()
+ResetButton.pack()
 FloodButton.pack()
 ConfigFrame.grid(padx=10, column=1, row=1)
 CommandsFrame.grid(padx=10, column=0, row=1)
