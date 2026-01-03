@@ -77,7 +77,7 @@ FloodButton = tk.Button(root, text="Flood Chat Lines", command=FloodChatLines)
 SetPointButton = tk.Button(root, text="Set Message Box Point (Saves 5 seconds after)", command=SetPoint)
 HappyFaceButton = tk.Button(root, text=":)", command=HappyFace)
 
-SetPointButton.pack()
+#SetPointButton.pack()
 AvailableButton.pack()
 BusyButton.pack()
 FloodButton.pack()
