@@ -51,10 +51,25 @@ def Reset():
     Type("[ " + YourName + " *Reset* their status ]")
 
 def FloodChatLines():
-    Type("/AICat FloodChatLines")
+    import tkinter as tk
+from tkinter import messagebox
+
+def show_warning():
+    messagebox.showwarning(
+        "Are you sure?",
+        "Are you sure? This can harm your chat and you may have to delete it."
+    )
+
+root = tk.Tk()
+root.title("Main Window")
+
+btn = tk.Button(root, text="Click me", command=show_warning)
+btn.pack(padx=20, pady=20)
+Type("/AICat FloodChatLines")
     for _ in range(50):
         Type(FloodChatLineMessage)
     Type("Flooding Complete")
+root.mainloop()
 
 def SetPoint():
     time.sleep(5)
@@ -118,3 +133,4 @@ def create_icon():
 threading.Thread(target=create_icon, daemon=True).start()
 
 root.mainloop()
+
